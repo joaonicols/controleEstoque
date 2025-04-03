@@ -196,6 +196,19 @@ select:focus{
     max-height: 300px;
 }
 
+/* CAMPOS OBRIGATÓRIOS */
+.campo-obrigatorio {
+    color: #ef476f;
+    margin-left: 3px;
+}
+
+.erro-mensagem {
+    color: #ef476f;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
 
 
 

@@ -16,4 +16,3 @@ produtoForm.addEventListener("submit", (event) => {
         document.getElementById("erro-nome").style.display = 'none';
     }
 });
-

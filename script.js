@@ -6,10 +6,44 @@ const preco = document.getElementById("preco");
 const quantidade = document.getElementById("quantidade");
 const imagem = document.getElementById("imagem");
 const produtoForm = document.getElementById("produto-form");
+const notificacao = document.getElementById("notificacao-conteudo");
+
+//escondendo as notificação até que a função seja chamada
+notificacao.style.display = 'none';
 
 //listas para armazenar os dados do formulário
 const categorias = [];
 const produtos = [];
+
+//função para exibir uma notificação
+function exibirNotificacao (mensagem, status){
+    //armazenando as variaveis, a viv e o span que guardam a mensagem de notificação 
+    const messageEl = document.getElementById("notificacao-mensagem");
+
+    //o textcontent ele é responsável por alterar o texto guardado no messageEl,
+    //ou seja, o que está dentro do span no HTML
+    messageEl.textContent = mensagem;
+
+    if(status == 'sucesso'){
+        notificacao.style.backgroundColor = '#dbead5';
+        messageEl.style.color = '#103900';
+    } else if(status === 'alerta'){
+        notificacao.style.backgroundColor = '#ffffa0';
+        messageEl.style.color = '#646600';
+    } else if (status == 'erro') {
+        notificacao.style.backgroundColor = '#fb6866';
+        messageEl.style.color = '#470300';
+    }
+
+    notificacao.style.display = 'block';
+
+    //esconde a notificação depois de 3 segundos
+    setTimeout(() => {
+        notificacao.style.display = 'none';
+    }, 3000);
+}
+
+
 
 //manipulando o evento de submit do formulário
 produtoForm.addEventListener("submit", (event) => {
@@ -68,4 +102,17 @@ produtoForm.addEventListener("submit", (event) => {
 
     //guardando a lista no localstorage, transformando os dados para json usando o JSON.stringify
     localStorage.setItem("nomeProduto", JSON.stringify(produtos));
+
+    //limpando os campos do formulário
+    produtoForm.reset();
+
+    // Mostrar no console
+    console.log("Produto inserido:", produtoInserido);
+    console.log("Lista de produtos atual:", produtos);
+
+    exibirNotificacao("Produto cadastrado com sucesso!", 'sucesso');
+
+
+
+
 });

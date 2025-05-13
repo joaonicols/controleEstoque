@@ -223,3 +223,45 @@ select:focus{
     justify-content: center;
     margin-top: 15px;
 }
+
+/* TABELA */
+.tabela-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgb(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #e9ecef;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+tr:hover {
+    background-color: #e6f2fd; 
+}
+
+.sem-produtos img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+.sem-produtos p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}

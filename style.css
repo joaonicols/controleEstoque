@@ -254,6 +254,14 @@ tr:hover {
     background-color: #e6f2fd; 
 }
 
+.sem-produtos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
 .sem-produtos img {
     width: 100px;
     height: 100px;

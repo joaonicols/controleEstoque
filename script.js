@@ -78,13 +78,7 @@ function verificaCampos() {
         document.getElementById("erro-quantidade").style.display = "none";
     }
 
-    //se existir algum campo não preenchido, ele encerra o meu evento,
-    //e isso impede que a informação incorreta seja inserida no meu localstorage0
-    if(camposPreenchidos == false){
-        return 
-    }
-
-    exibirNotificacao("Produto cadastrado com sucesso!", 'sucesso');
+    return camposPreenchidos;
 }
 
 //manipulando o evento de submit do formulário
@@ -92,7 +86,29 @@ produtoForm.addEventListener("submit", (event) => {
     //impedir de recarregar a página quando o evento de submit(envio) for chamado
     event.preventDefault();
 
-    verificaCampos();
+    // verifica quantos campos foram preenchidos
+    let totalCampos = 4;
+    let preenchidos = 0;
+
+    if (nome.value !== '') preenchidos++;
+    if (categoria.value !== '') preenchidos++;
+    if (preco.value !== '') preenchidos++;
+    if (quantidade.value !== '') preenchidos++;
+
+    if (preenchidos === 0) {
+        verificaCampos();
+        exibirNotificacao("Nenhum produto adicionado, preencha todos os campos!", 'erro');
+        return;
+    }
+
+    if (preenchidos < totalCampos) {
+        verificaCampos();
+        exibirNotificacao("Faltam alguns campos serem preenchidos!", 'alerta');
+        return;
+    }
+
+    verificaCampos(); 
+    exibirNotificacao("Produto cadastrado com sucesso!", 'sucesso');
 
     //criando um objeto para armazenar os dados do formulário
     const produtoInserido = {
@@ -116,15 +132,23 @@ produtoForm.addEventListener("submit", (event) => {
     //limpando os campos do formulário
     produtoForm.reset();
 
+    adicionarItemTabela();
+
     // Mostrar no console
     // console.log("Produto inserido:", produtoInserido);
     // console.log("Lista de produtos atual:", produtos);
 });
 
 function adicionarItemTabela() {
+    const semProdutosDiv = document.getElementById("sem-produtos");
     let produtos = JSON.parse(localStorage.getItem("nomeProduto")) || [];
 
     let valoresTabela = '';
+
+    //verifica se tem algum produto
+    if(produtos.length > 0) {
+        semProdutosDiv.style.display = 'none';
+    }
     
     produtos.forEach(produto => {
         console.log(produto);
@@ -134,10 +158,12 @@ function adicionarItemTabela() {
                 <td>${produto.nome}</td>
                 <td>${produto.categoria}</td>
                 <td>${produto.preco}</td>
-                <td${produto.quantidade}</td>
+                <td>${produto.quantidade}</td>
             </tr>
         `
     });
 
     tbody.innerHTML = valoresTabela
 }
+
+adicionarItemTabela();

@@ -71,7 +71,7 @@ function verificaCampos() {
     }
 
     //valida se o campo quantidade esta vazio e exibe uma mensagem
-    if(quantidade.value == ''){
+    if(quantidade.value == '' || quantidade.value == 0){
         document.getElementById("erro-quantidade").style.display = "block";
         camposPreenchidos = false;
     } else {
